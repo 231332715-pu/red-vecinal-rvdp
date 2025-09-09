@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Red Vecinal Digital Puebla</title>
+  <style>
+    :root { --primary:#1E40AF; --accent:#475569; --light:#F1F5F9; --dark:#0f172a; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; color:var(--dark); background:#ffffff; }
+    header { background: var(--primary); color: white; }
+    .topbar { display:flex; align-items:center; gap:12px; padding:10px 16px; }
+    .logo { width:40px; height:40px; border-radius:50%; background:white; display:grid; place-items:center; color:var(--primary); font-weight:700; }
+    .brand { font-weight:700; }
+    .hero { width:100%; height:auto; display:block; }
+    .btns { display:flex; gap:12px; flex-wrap:wrap; padding:14px 16px; background:#0f1e6a; }
+    .btns a { background:white; color:#0f1e6a; padding:10px 14px; border-radius:10px; text-decoration:none; font-weight:600; }
+    nav { position:sticky; top:0; z-index:5; display:flex; gap:16px; padding:12px 16px; background: var(--primary); flex-wrap:wrap; border-top:1px solid rgba(255,255,255,.25); }
+    nav a { color:white; text-decoration:none; padding:6px 10px; border:1px solid rgba(255,255,255,.4); border-radius:8px; }
+    section { padding: 28px 16px; max-width: 980px; margin: 0 auto; }
+    h2 { color: var(--primary); margin-top:0; }
+    .card { background: var(--light); border:1px solid #e2e8f0; border-radius:12px; padding:16px; margin:12px 0; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+    .badge { font-size:12px; background:#e2e8f0; padding:4px 8px; border-radius:999px; color:#334155; }
+    .list-tight li { margin:6px 0; }
+    .note { color:#475569; font-size:14px; }
+    img { max-width:100%; height:auto; border-radius:10px; }
+    footer { border-top:1px solid #e2e8f0; padding:24px 16px; text-align:center; color:#475569; margin-top:24px; }
+    .embed { width:100%; aspect-ratio:16/9; border:0; border-radius:12px; }
+    .placeholder { border:1px dashed #94a3b8; background:#fff; color:#475569; padding:18px; border-radius:12px; text-align:center; }
+    @media (max-width:640px){ .btns { justify-content:center; } }
+  </style>
+
+  <!-- CONFIG (modifica estos valores si quieres) -->
+  <script>
+    const CONFIG = {
+      siteTitle: "Red Vecinal Digital Puebla",
+      subtitle: "Reporte y seguimiento comunitario de incidentes",
+      formsURL: "https://docs.google.com/forms/d/e/1FAIpQLSd70NAQ-F-c01We81J1FIlSFVfCsyaAlADaFw8-_YTK8pHR0w/viewform?usp=dialog",
+      whatsappURL: "",
+      youtubeID: "",
+      contactEmail: "tu-correo@ejemplo.com"
+    };
+
+    function toEmbed(url) {
+      if (!url) return "";
+      if (url.includes("embedded=true")) return url;
+      if (url.includes("?")) return url + "&embedded=true";
+      return url + "?embedded=true";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("brand").textContent = CONFIG.siteTitle || "Red Vecinal";
+      document.getElementById("subtitle").textContent = CONFIG.subtitle || "";
+      document.getElementById("btnInicio").href = "#top";
+
+      const btnRep = document.getElementById("btnReportar");
+      const hasForm = !!CONFIG.formsURL;
+      btnRep.href = hasForm ? CONFIG.formsURL : "#reportar";
+      btnRep.target = hasForm ? "_blank" : "_self";
+
+      const btnWA = document.getElementById("btnWA");
+      if (CONFIG.whatsappURL) {
+        btnWA.href = CONFIG.whatsappURL;
+      } else {
+        btnWA.style.display = "none";
+      }
+
+      const frame = document.getElementById("yt");
+      const placeholder = document.getElementById("ytph");
+      if (CONFIG.youtubeID) {
+        frame.src = "https://www.youtube.com/embed/" + CONFIG.youtubeID;
+        frame.style.display = "block";
+        placeholder.style.display = "none";
+      } else {
+        frame.style.display = "none";
+        placeholder.style.display = "block";
+      }
+
+      const formFrame = document.getElementById("formFrame");
+      const formPH = document.getElementById("formPH");
+      if (hasForm) {
+        formFrame.src = toEmbed(CONFIG.formsURL);
+        formFrame.style.display = "block";
+        formPH.style.display = "none";
+      } else {
+        formFrame.style.display = "none";
+        formPH.style.display = "block";
+      }
+
+      document.getElementById("contact").textContent = CONFIG.contactEmail || "";
+    });
+  </script>
+</head>
+<body>
+<div id="top"></div>
+<header>
+  <div class="topbar">
+    <div class="logo">RV</div>
+    <div class="brand" id="brand">Red Vecinal Digital Puebla</div>
+  </div>
+  <div class='hero' style='height:160px;background:#1E40AF'></div>
+  <div class="btns">
+    <a id="btnInicio" href="#top">Inicio</a>
+    <a id="btnReportar" href="#reportar">Reportar incidente</a>
+    <a id="btnWA" href="#" target="_blank" rel="noopener">Unirte a WhatsApp</a>
+  </div>
+  <nav>
+    <a href="#problema">Problema</a>
+    <a href="#objetivos">Objetivos</a>
+    <a href="#tecnologias">Tecnologías</a>
+    <a href="#cronograma">Cronograma</a>
+    <a href="#estandares">Estándares</a>
+    <a href="#resultados">Resultados</a>
+    <a href="#video">Video</a>
+    <a href="#reportar">Formulario</a>
+  </nav>
+</header>
+
+<section id="problema">
+  <h2>Problema</h2>
+  <div class="card">
+    <p>La comunidad necesita un mecanismo sencillo para reportar incidentes del entorno (baches, alumbrado, seguridad, etc.) y darles seguimiento transparente.</p>
+    <p class="note" id="subtitle">Reporte y seguimiento comunitario de incidentes</p>
+  </div>
+</section>
+
+<section id="objetivos">
+  <h2>Objetivos y justificación</h2>
+  <div class="grid">
+    <div class="card">
+      <strong>Objetivo general</strong>
+      <ul class="list-tight">
+        <li>Facilitar el reporte y seguimiento de incidentes barriales mediante una plataforma accesible.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>Objetivos específicos</strong>
+      <ul class="list-tight">
+        <li>Lanzar formulario de reportes con evidencia.</li>
+        <li>Difundir y capacitar a la comunidad en su uso.</li>
+        <li>Monitorear y cerrar reportes en tiempos definidos.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>Justificación</strong>
+      <p>Mejora la coordinación vecinal y reduce tiempos de atención al centralizar la información y estandarizar el proceso.</p>
+    </div>
+  </div>
+</section>
+
+<section id="tecnologias">
+  <h2>Tecnologías emergentes utilizadas</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="badge">Comunicación</span>
+      <h3>Chatbot WhatsApp</h3>
+      <ul class="list-tight">
+        <li><b>Ventajas:</b> respuesta 24/7; guía al vecino para enviar datos completos.</li>
+        <li><b>Desventajas:</b> requiere diseño de flujo y pruebas.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="badge">Alertas</span>
+      <h3>Notificaciones Web Push</h3>
+      <ul class="list-tight">
+        <li><b>Ventajas:</b> avisos por colonia; recordatorios de tareas y eventos.</li>
+        <li><b>Desventajas:</b> depende del navegador; requiere opt‑in.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="badge">Gestión</span>
+      <h3>Transcripción de reuniones</h3>
+      <ul class="list-tight">
+        <li><b>Ventajas:</b> acuerdos claros y trazables; facilita minutas.</li>
+        <li><b>Desventajas:</b> requiere revisión posterior.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="cronograma">
+  <h2>Cronograma (Gantt)</h2>
+  <div class="card">
+    <p class="placeholder">[Inserta aquí la imagen de tu Gantt si la quieres mostrar.]</p>
+    <p class="note">Fases: planeación, ejecución (formulario + difusión + capacitación), seguimiento, evaluación.</p>
+  </div>
+</section>
+
+<section id="estandares">
+  <h2>Estándares de control</h2>
+  <div class="grid">
+    <div class="card">
+      <strong>Tiempo</strong>
+      <ul class="list-tight">
+        <li>Prototipo semana 2; formulario operativo semana 6; desvío máximo del plan: ≤ 10%.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>Calidad</strong>
+      <ul class="list-tight">
+        <li>Disponibilidad ≥ 99%; errores del formulario &lt; 2%.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>Cantidad</strong>
+      <ul class="list-tight">
+        <li>≥ 10 reportes semanas 7–8; ≥ 2 voluntarios activos.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>Proceso/Finanzas</strong>
+      <ul class="list-tight">
+        <li>Atención de reportes ≤ 72 h; ≥ 80% cerrados; gasto vs. plan ≤ +15%.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="resultados">
+  <h2>Resultados / Evidencias</h2>
+  <div class="card">
+    <ul class="list-tight">
+      <li>Capturas del formulario y ejemplos de reportes (anonimizados).</li>
+      <li>Materiales de difusión (infografías, stories).</li>
+      <li>Minutas y acuerdos de seguimiento.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="video">
+  <h2>Video de presentación</h2>
+  <div id="ytph" class="placeholder">[Aquí se mostrará tu video cuando definas youtubeID en la CONFIG]</div>
+  <iframe class="embed" id="yt" src="" title="Presentación del proyecto"></iframe>
+</section>
+
+<section id="reportar">
+  <h2>Formulario: Reportar incidente</h2>
+  <div id="formPH" class="placeholder">[Tu formulario aparecerá aquí; si no carga, abre con el botón “Reportar incidente”.]</div>
+  <iframe class="embed" id="formFrame" src=""></iframe>
+</section>
+
+<footer>
+  © 2025 – Proyecto comunitario. Contacto: <span id="contact">tu-correo@ejemplo.com</span>.
+</footer>
+</body>
+</html>
